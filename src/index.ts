@@ -9,6 +9,14 @@ import { AddressInfo } from 'net';
 
 const app:Application = express();
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+
+    next();
+});
+
 app.use(express.json());
 
 userRouter(app);

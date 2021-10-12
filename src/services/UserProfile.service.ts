@@ -35,8 +35,8 @@ export default class UserProfile {
             .then((response:unknown) => response as IUserProfile);
     }
 
-    async findUserReadedBook(username:string) {
-        return (await this.userProfile).findUserReadedBook(username)
+    async findUserBooks(username:string) {
+        return (await this.userProfile).findUserBooks(username)
             .catch((err:unknown) => (err as Error).message);
     }
 }
