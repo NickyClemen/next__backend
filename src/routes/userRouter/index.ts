@@ -10,6 +10,12 @@ import axios from 'axios';
 import UserProfile from '../../services/UserProfile.service';
 import IUserProfile from '../../interfaces/IUserProfile.interface';
 
+/**
+ * Enpoint GET para filtrar usuarios desde frontend.
+ * Retorna el perfil de usuario con un código 200. Los libros vinculados si no son encontrados,
+ * son retornados como undefined.
+ * @param app
+ */
 export default async function userRouter(app:Application):Promise<void> {
     const router:Router = express.Router();
     app.use('/api', router);
@@ -27,6 +33,13 @@ export default async function userRouter(app:Application):Promise<void> {
                 }
             });
 
+            /**
+            * Filtra la lista de libros vinculada a un usuario por username.
+            * @async
+            * @method
+            * @param {String} username
+            * @returns {IBook[]} Array desestructurado con los valores por leído, por leer, abandonado y leyendo.
+            */
             const [books] = await userProfileService.findUserBooks((userProfile as IUserProfile).username);
 
             if(books) {

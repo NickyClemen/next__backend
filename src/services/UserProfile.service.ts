@@ -25,16 +25,25 @@ export default class UserProfile {
         return UserProfile.instance;
     }
 
+    /**
+    * Filtra un usuario por username.
+    * @async
+    * @method
+    * @param {String} username
+    * @returns {UserProfile} usuario.
+    */
     async findUserByUsername(username:string):Promise<IUserProfile|null> {
         return (await this.userProfile).findUserByUsername(username)
             .then((response:unknown) => response as IUserProfile);
     }
 
-    async findUserByEmail(email:string):Promise<IUserProfile|null> {
-        return (await this.userProfile).findUserByEmail(email)
-            .then((response:unknown) => response as IUserProfile);
-    }
-
+    /**
+    * Filtra la lista de libros vinculada a un usuario por username.
+    * @async
+    * @method
+    * @param {String} username
+    * @returns {IBook[]} Array con los valores por leído, por leer, abandonado y leyendo.
+    */
     async findUserBooks(username:string) {
         return (await this.userProfile).findUserBooks(username)
             .catch((err:unknown) => (err as Error).message);
